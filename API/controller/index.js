@@ -30,6 +30,4 @@ module.export = {
     express,
     routes
 }
-// routes.get('^/$|/challenger', (req, res)=>{
-//     res.sendFile(path.resolve(__dirname, "../static/HTML/index.html"))
-// })
+
