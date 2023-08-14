@@ -1,4 +1,7 @@
 const db = require("../config") //this imprt the db con from config
+const {hash, compare, hashSync} = require('bcrypt')
+const {createToken} = require('../middleware/authentication')
+
 class Users{
     fetchUsers(req, res){
         const query = `
@@ -32,7 +35,33 @@ class Users{
     }
     login(req, res){    
     }
-    register(req, res){
+     async register(req, res){
+      const data = req.body 
+      //encrypt password
+      data.userPass = await hash(data.userPass, 15)
+      //PAYLOAD means DATA THAT COMES FROM THE USER
+      const user = {
+        emailAdd: data.emailAdd,
+        userPass: data.userPass
+      }
+      //query
+      const query = `
+      INSERT INTO Users
+      SET ?; 
+      `
+      db.query(query,[data], (err)=>{
+        if(err) throw err
+        //create a token
+        let token = createToken(user) 
+            res.cookie("LegitUser", token, {
+                maxAge:  3600000,
+                httpOnly: true
+            });
+            res.json({
+                sastus: res.statuCode,
+                msg: "You are now registered."
+            })
+      })
     }
     updateUser(req, res){
         const query =`
@@ -62,5 +91,5 @@ class Users{
             })
         })
     }
-}
+} 
 module.exports = Users
