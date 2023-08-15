@@ -1,4 +1,4 @@
-class BookAuthors{
+class BookAuth{
 
 }
-module.exports = BookAuthors
+module.exports = BookAuth

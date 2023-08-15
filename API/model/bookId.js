@@ -1,4 +1,4 @@
-class Books{
+class bookId{
 
 }
-module.exports = Books
+module.exports = bookId
