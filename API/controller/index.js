@@ -26,7 +26,7 @@ routes.delete('/user/:id', (req, res)=>{
     users.delete(req, res)
 })
 
-module.export = {
+module.exports = {
     express,
     routes
 }

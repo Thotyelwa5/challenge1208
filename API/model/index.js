@@ -1,7 +1,7 @@
-const Users = require('./Users')
-const Orders = require('./Orders')
-const Books = require('./Books')
-const BookAuthors = require('./BookAuthors')
+const Users = require('./user')
+const Orders = require('./order')
+const Books = require('./bookId')
+const BookAuthors = require('./bookAuth')
 //Export all objects
 module.exports = {
     users: new Users(),
