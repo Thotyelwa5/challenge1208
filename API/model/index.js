@@ -5,4 +5,8 @@ const BookAuthors = require('./bookAuth')
 //Export all objects
 module.exports = {
     users: new Users(),
+    order: new Orders(),
+    bookId: new Books(),
+    bookAuth: new BookAuthors()
 }
+ 
