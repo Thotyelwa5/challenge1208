@@ -9,7 +9,7 @@ class Users{
         emailAdd, profileUrl
         FROM Users;
         `
-        db.query(query,(err, result)=>{
+        db.query(query,(err, results)=>{
             if(err)throw err
             res.json({
                 status: res.stausCode,
@@ -25,7 +25,7 @@ class Users{
         WHERE userId = ${req.params.id};
         `
         db.query(query,
-            (err, results)=>{
+            (err, result)=>{
                 if (err) throw err 
                 res.json({
                     status: res.statusCode,
@@ -58,7 +58,7 @@ class Users{
                 httpOnly: true
             });
             res.json({
-                sastus: res.statuCode,
+                status: res.statusCode,
                 msg: "You are now registered."
             })
       })
@@ -72,10 +72,10 @@ class Users{
         gender, userDOB, emailAdd, userPass,
         profileUrl
         FROM Users
-        WHERE emailAdd = ?;
+        WHERE emailAdd = '${emailAdd}';
         `;
         
-        db.query(query, [emailAdd], async (err, result) => {
+        db.query(query, async (err, result) => {
             if (err) throw err;
             if (!result?.length) {
                 res.json({
@@ -113,6 +113,11 @@ class Users{
     }
     
     updateUser(req, res){
+        const data = req.body
+        if (data.userPass){
+            data.userPass = 
+            hashSync(data.userPass, 15)
+        }
         const query =`
         UPDATE User
         SET ?
