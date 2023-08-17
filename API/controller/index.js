@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const {verifyAToken} = require('../middleware/authentication')
 const routes = express.Router()
 //Import all model's objects
 const {users} = require('../model')
@@ -29,10 +30,14 @@ routes.post('/login',
 bodyParser.json(), (req, res)=>{
     users.login(req, res)
 })
+//Book's router
+// routes.get(/book)
+
 
 
 module.exports = {
     express,
-    routes
+    routes,
+    verifyAToken
 }
 
