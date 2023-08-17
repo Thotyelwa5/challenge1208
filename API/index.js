@@ -12,7 +12,8 @@ app.use(
     routes
 )
 routes.get('^/$|/challenger', (req, res)=>{
-    res.sendFile(path.resolve(__dirname, "../static/HTML/index.html"))
+    res.sendFile(path.resolve(__dirname,
+        "./static/HTML/index.html"))
 })
 app.listen(port, ()=>{
     console.log(`The server is running on port ${port}`);
